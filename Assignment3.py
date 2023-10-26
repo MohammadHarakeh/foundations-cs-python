@@ -13,6 +13,7 @@ def menu():
 def addMatrices():
     matrix1 = []
     matrix2 = []
+    result = []
 
     row1 = int(input("enter the number of rows for matrix 1: "))
     column1 = int(input("enter the number of columns for matrix 1: "))
@@ -26,29 +27,32 @@ def addMatrices():
         addMatrices()
 
     for i in range(row1):
-        print("input for row", i)
+        print("input for row", i, "int the first matrix")
         matrix1.append([])
         for j in range(column1):
-            print("input for column", j)
+            print("input for column", j, "in the first matrix")
             print("")
             input1 = int(input("input into the first matrix: "))
             matrix1[i].append(input1)
     print("the first matrix is: ", matrix1)
 
     for i in range(row2):
-        print("input for row", i)
+        print("input for row", i, "in the second matrix")
         matrix2.append([])
         for j in range(column2):
-            print("input for column", j)
+            print("input for column", j, "in the second matrix")
             print("")
             input2 = int(input("input into the second matrix: "))
             matrix2[i].append(input2)
             print("the second matrix is: ", matrix2)
 
-    for i in range(len(matrix1)):
-        for j in range(len(matrix1[0])):
-            result = [matrix1[i][j] + matrix2[i][j]]
-    print(result)
+    for row1, row2 in zip(matrix1, matrix2):
+        result_row = [x + y for x, y in zip(row1,row2)]
+        result.append(result_row)
+    print("The addition of the two matrices are: ")
+    print()
+    for row in result:
+        print(row)
 
 
 
