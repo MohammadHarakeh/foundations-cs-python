@@ -7,13 +7,23 @@ def menu():
     print("6. Search for an Element & Merge Sort")
     print("7. Exit")
 
+def addMatrices():
+    print("hello")
+
+
 
 def main():
-    name = str(input("What is your name? "))
-    print(f"Hello {name} what would you like to do? ")
-    print("")
+    while True:
+        name = str(input("What is your name? "))
+        print(f"Hello {name} what would you like to do? ")
+        print("")
 
-    menu()
+        menu()
+        choice = input("Enter your choice from 1 -> 7: ")
+        print("")
+
+        if choice == '1':
+            addMatrices()
 
 
 main()
