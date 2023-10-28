@@ -89,6 +89,14 @@ def checkRotation():
 
     if column1 == row2 and row1 == column2:
         print("Matrix 1 and Matrix 2 have compatible dimensions for rotation.")
+        for row in matrix2:
+            for element1 in row:
+                print(element1, end=' ')
+            print()
+        for row in matrix1:
+            for element2 in row:
+                print(element2, end=' ')
+                print()
     else:
         print("Matrix 1 and Matrix 2 do not have compatible dimensions for rotation.")
 
