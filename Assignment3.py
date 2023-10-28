@@ -1,6 +1,3 @@
-import sys
-
-
 def menu():
     print("1. Add Matrices")
     print("2. Check Rotation")
@@ -48,12 +45,52 @@ def addMatrices():
 
     for row1, row2 in zip(matrix1, matrix2):
         result_row = [x + y for x, y in zip(row1,row2)]
+        # Zip is used to combine two or more lists
         result.append(result_row)
     print("The addition of the two matrices are: ")
     print()
     for row in result:
         print(row)
+# addMatrice is O(N^2)
 
+def checkRotation():
+    matrix1 = []
+    matrix2 = []
+
+    row1 = int(input("enter the number of rows for matrix 1: "))
+    column1 = int(input("enter the number of columns for matrix 1: "))
+    print()
+
+    row2 = int(input("enter the number of rows for matrix 2: "))
+    column2 = int(input("enter the number of columns for matrix 2: "))
+
+    for i in range(row1):
+        print("input for row", i, "int the first matrix")
+        matrix1.append([])
+        for j in range(column1):
+            print("input for column", j, "in the first matrix")
+            print("")
+            input1 = int(input("input into the first matrix: "))
+            matrix1[i].append(input1)
+    print("the first matrix is: ", matrix1)
+
+    for i in range(row2):
+        print("input for row", i, "in the second matrix")
+        matrix2.append([])
+        for j in range(column2):
+            print("input for column", j, "in the second matrix")
+            print("")
+            input2 = int(input("input into the second matrix: "))
+            matrix2[i].append(input2)
+            print("the second matrix is: ", matrix2)
+
+    print("Matrix one: ", matrix1)
+    print("Matrix Two: ", matrix2)
+
+    if column1 == row2 and row1 == column2:
+        print("Matrix 1 and Matrix 2 have compatible dimensions for rotation.")
+    else:
+        print("Matrix 1 and Matrix 2 do not have compatible dimensions for rotation.")
 
 
 
@@ -69,6 +106,8 @@ def main():
 
         if choice == '1':
             addMatrices()
+        elif choice == '2':
+            checkRotation()
 
 
 main()
