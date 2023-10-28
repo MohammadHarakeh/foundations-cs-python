@@ -72,7 +72,7 @@ def checkRotation():
             print("")
             input1 = int(input("input into the first matrix: "))
             matrix1[i].append(input1)
-    print("the first matrix is: ", matrix1)
+            print("the first matrix is: ", matrix1)
 
     for i in range(row2):
         print("input for row", i, "in the second matrix")
@@ -101,6 +101,16 @@ def checkRotation():
         print("Matrix 1 and Matrix 2 do not have compatible dimensions for rotation.")
 
 
+def invertedDictionary(input1):
+    hashmap = {}
+    for key, value in input1.items():
+        if value in hashmap:
+            hashmap[value].append(key)
+        else:
+            hashmap[value] = [key]
+    return hashmap
+# invertedDictionary is O(N)
+
 
 def main():
     while True:
@@ -116,7 +126,20 @@ def main():
             addMatrices()
         elif choice == '2':
             checkRotation()
+        elif choice == '3':
+            hashmap = {}
+            num_items = int(input("Enter the number of items in the dictionary: "))
+
+            for i in range(num_items):
+                key = input("Enter a key: ")
+                value = input("Enter a value: ")
+                hashmap[key] = value
+
+            print("Before inverting:", hashmap)
+
+            inverted_hashmap = invertedDictionary(hashmap)
+
+            print("After inverting:", inverted_hashmap)
 
 
 main()
-
