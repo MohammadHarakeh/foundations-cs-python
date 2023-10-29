@@ -170,6 +170,13 @@ def palindromeCheck(s):
 # palindromeCheck is O(N)
 
 
+
+def indexFinder(x, y):
+    for i in range(len(y)):
+        if x == y[i]:
+            return i
+    return -1
+
 def mergeSort(s):
     if len(s) > 1:
         mid = len(s) // 2
