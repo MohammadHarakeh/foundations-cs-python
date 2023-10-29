@@ -53,6 +53,7 @@ def addMatrices():
     print()
     for row in result:
         print(row)
+        print()
 
 
 # addMatrice is O(N^2)
@@ -103,6 +104,10 @@ def checkRotation():
                 return menu()
     else:
         print("They are a rotation of each other")
+        print()
+
+
+# checkRotation is O(N^2)
 
 
 def invertedDictionary(input1):
@@ -134,20 +139,26 @@ def matrixDictionary():
 
         job_title = input("Enter your job title: ")
         temp.append(job_title)
+        print()
+
+        if user_id in hashmap:
+            print("User ID was already in the dictionary and was replaced")
+            print()
 
         list1.append(temp)
         hashmap[user_id] = temp
+
     print("List: ", list1)
     print()
     print("hashmap: ", hashmap)
+    print()
 
 
 def main():
+    name = str(input("What is your name? "))
+    print(f"Hello {name} what would you like to do? ")
+    print("")
     while True:
-        name = str(input("What is your name? "))
-        print(f"Hello {name} what would you like to do? ")
-        print("")
-
         menu()
         choice = input("Enter your choice from 1 -> 7: ")
         print("")
