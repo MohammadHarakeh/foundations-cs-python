@@ -189,6 +189,17 @@ def mergeSort(s):
                 j += 1
             k += 1
 
+            while i < len(left):
+                s[k] = left[i]
+                i += 1
+                k += 1
+
+            while j < len(right):
+                s[k] = right[j]
+                j += 1
+                k += 1
+        return s
+
 def main():
     name = str(input("What is your name? "))
     print(f"Hello {name} what would you like to do? ")
@@ -219,10 +230,18 @@ def main():
 
         elif choice == '4':
             matrixDictionary()
+
         elif choice == '5':
             s = input("Enter string to check for palindrome: ")
             print()
             print(palindromeCheck(s))
+            print()
+
+        elif choice == '6':
+            s = input("Enter numbers: ").split()
+            int_s = [int(num) for num in s]
+            print(mergeSort(int_s))
+            mergeSort(s)
             print()
 
 
