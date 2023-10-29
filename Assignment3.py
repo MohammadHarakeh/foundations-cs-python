@@ -167,7 +167,7 @@ def palindromeCheck(s):
     return False
 
 
-# palindromeCheck O(N)
+# palindromeCheck is O(N)
 
 
 def mergeSort(s):
@@ -199,6 +199,9 @@ def mergeSort(s):
                 j += 1
                 k += 1
         return s
+
+
+#mergeSort is O(NlgN)
 
 def main():
     name = str(input("What is your name? "))
