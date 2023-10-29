@@ -116,7 +116,6 @@ def invertedDictionary(input1):
 # invertedDictionary is O(N)
 
 def matrixDictionary():
-    def matrixDictionary():
         input1 = int(input("Enter number of users: "))
         list1 = []
         hashmap = {}
