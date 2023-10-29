@@ -116,7 +116,26 @@ def invertedDictionary(input1):
 # invertedDictionary is O(N)
 
 def matrixDictionary():
+    def matrixDictionary():
+        input1 = int(input("Enter number of users: "))
+        list1 = []
+        hashmap = {}
+        for i in range(input1):
+            temp = []
+            first_name = input("Enter first name: ")
+            temp.append(first_name)
 
+            last_name = input("Enter last name: ")
+            temp.append(last_name)
+
+            user_id = input("Enter your ID: ")
+            temp.append(user_id)
+
+            job_title = input("Enter your job title: ")
+            temp.append(job_title)
+
+            list1.append(temp)
+        print(list1)
 
 
 def main():
