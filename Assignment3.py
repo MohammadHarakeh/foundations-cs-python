@@ -265,5 +265,8 @@ def main():
             mergeSort(s)
             print()
 
+        elif choice == '7':
+            break
+
 
 main()
