@@ -154,6 +154,21 @@ def matrixDictionary():
     print()
 
 
+# matrixDictionary is O(N)
+
+
+def palindromeCheck(s):
+    if len(s) <= 1:
+        return True
+
+    if s[0].lower() == s[-1].lower():
+        return palindromeCheck(s[1:-1])
+
+    return False
+
+
+# palindromeCheck O(N)
+
 def main():
     name = str(input("What is your name? "))
     print(f"Hello {name} what would you like to do? ")
@@ -184,6 +199,11 @@ def main():
 
         elif choice == '4':
             matrixDictionary()
+        elif choice == '5':
+            s = input("Enter string to check for palindrome: ")
+            print()
+            print(palindromeCheck(s))
+            print()
 
 
 main()
