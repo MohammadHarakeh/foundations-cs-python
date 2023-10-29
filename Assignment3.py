@@ -250,6 +250,17 @@ def main():
         elif choice == '6':
             s = input("Enter numbers: ").split()
             int_s = [int(num) for num in s]
+
+            look = int(input("What to look for: "))
+            index = indexFinder(look, int_s)
+
+            if index != -1:
+                print()
+                print("The number you are looking for is found at: ", index)
+            else:
+                print("Number not in list")
+            print()
+
             print(mergeSort(int_s))
             mergeSort(s)
             print()
