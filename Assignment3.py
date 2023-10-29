@@ -6,6 +6,8 @@ def menu():
     print("5. Check Palindrome")
     print("6. Search for an Element & Merge Sort")
     print("7. Exit")
+    print()
+
 
 def addMatrices():
     matrix1 = []
@@ -44,13 +46,15 @@ def addMatrices():
             print("the second matrix is: ", matrix2)
 
     for row1, row2 in zip(matrix1, matrix2):
-        result_row = [x + y for x, y in zip(row1,row2)]
+        result_row = [x + y for x, y in zip(row1, row2)]
         # Zip is used to combine two or more lists
         result.append(result_row)
     print("The addition of the two matrices are: ")
     print()
     for row in result:
         print(row)
+
+
 # addMatrice is O(N^2)
 
 def checkRotation():
@@ -63,6 +67,11 @@ def checkRotation():
 
     row2 = int(input("enter the number of rows for matrix 2: "))
     column2 = int(input("enter the number of columns for matrix 2: "))
+
+    if row1 != column2 or column1 != row2:
+        print("They are not a rotation of each other")
+        print()
+        return menu()
 
     for i in range(row1):
         print("input for row", i, "int the first matrix")
@@ -83,22 +92,17 @@ def checkRotation():
             input2 = int(input("input into the second matrix: "))
             matrix2[i].append(input2)
             print("the second matrix is: ", matrix2)
+            print("Matrix one: ", matrix1)
+            print("Matrix Two: ", matrix2)
 
-    print("Matrix one: ", matrix1)
-    print("Matrix Two: ", matrix2)
-
-    if column1 == row2 and row1 == column2:
-        print("Matrix 1 and Matrix 2 have compatible dimensions for rotation.")
-        for row in matrix2:
-            for element1 in row:
-                print(element1, end=' ')
-            print()
-        for row in matrix1:
-            for element2 in row:
-                print(element2, end=' ')
+    for i in range(row1):
+        for j in range(column2):
+            if matrix1[i][j] != matrix2[j][i]:
+                print("They are not a rotation of each other")
                 print()
+                return menu()
     else:
-        print("Matrix 1 and Matrix 2 do not have compatible dimensions for rotation.")
+        print("They are a rotation of each other")
 
 
 def invertedDictionary(input1):
@@ -110,6 +114,9 @@ def invertedDictionary(input1):
             hashmap[value] = [key]
     return hashmap
 # invertedDictionary is O(N)
+
+def matrixDictionary():
+
 
 
 def main():
@@ -140,6 +147,9 @@ def main():
             inverted_hashmap = invertedDictionary(hashmap)
 
             print("After inverting:", inverted_hashmap)
+
+        elif choice == '4':
+            matrixDictionary()
 
 
 main()
