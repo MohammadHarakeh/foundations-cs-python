@@ -170,12 +170,14 @@ def palindromeCheck(s):
 # palindromeCheck is O(N)
 
 
-
 def indexFinder(x, y):
     for i in range(len(y)):
         if x == y[i]:
             return i
     return -1
+
+
+# indexFinder is O(N)
 
 def mergeSort(s):
     if len(s) > 1:
@@ -208,7 +210,7 @@ def mergeSort(s):
         return s
 
 
-#mergeSort is O(NlgN)
+# mergeSort is O(NlgN)
 
 def main():
     name = str(input("What is your name? "))
