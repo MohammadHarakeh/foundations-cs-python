@@ -1,8 +1,10 @@
-# This will display the menu that the user can choose from
+import requests
+from bs4 import BeautifulSoup
+
 
 open_tabs = []
 
-
+# This will display the menu that the user can choose from
 def menu():
     print("1. Open Tab")
     print("2. Close Tab")
@@ -37,8 +39,10 @@ def openTab():
     print()
 
 
+# This function will remove a tab after specifying the index
 def closeTab():
     user_input = input("Enter the index of the tab you want to close: ")
+    # this will make sure that the entered is a digit if not it will then remove the last index
     if user_input.isdigit():
         tab_index = int(user_input)
         if 0 <= tab_index < len(open_tabs):
@@ -48,9 +52,17 @@ def closeTab():
             print("Index out of range, removing last index ")
             open_tabs.pop(-1)
             print(open_tabs)
+    # this is for the first .isdigit() where if it wasn't a digit then it will print the below.
     else:
         print("Invalid input, try again")
+        print()
 
+def switchTab():
+    user_input = input("Enter the index of the tab you want to display: ")
+    if user_input.isdigit():
+        tab_index = int(user_input)
+        if 0 <= tab_index < len(open_tabs):
+            response = requests.get()
 
 # This will contain all the function that I have created and call them depending on the users choice
 def main():
@@ -65,6 +77,8 @@ def main():
             openTab()
         elif choice == "2":
             closeTab()
+        elif choice == "3":
+            switchTab()
 
 
 main()
