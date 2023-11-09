@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-
 open_tabs = []
+url = ""
+
 
 # This will display the menu that the user can choose from
 def menu():
@@ -29,6 +30,7 @@ def userName():
 def openTab():
     tab_dic = {}
     title = input("Enter the title of the website: ")
+    global url
     url = input("Enter the URL of the website: ")
     # if the title (key) is in tab storage then im adding another url (value) to it else I add one
     tab_dic["title"] = title
@@ -57,12 +59,27 @@ def closeTab():
         print("Invalid input, try again")
         print()
 
+
 def switchTab():
+    # This is accessing the url that is in the first function openTab()
+    global url
     user_input = input("Enter the index of the tab you want to display: ")
+    print()
     if user_input.isdigit():
         tab_index = int(user_input)
         if 0 <= tab_index < len(open_tabs):
-            response = requests.get()
+            response = requests.get(url)
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.text, 'html.parser')
+                title = soup.title.text
+                paragraphs = soup.find_all('p')
+                print(f"Title: {title}")
+                for i, paragraph in enumerate(paragraphs, 1):
+                    print(f"Paragraph {i}: {paragraph.text}")
+                print()
+            else:
+                print(f'Failed to retrieve the webpage. Status code: {response.status_code}')
+
 
 # This will contain all the function that I have created and call them depending on the users choice
 def main():
