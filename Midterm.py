@@ -1,8 +1,6 @@
 # This will display the menu that the user can choose from
 
-tab_storage = {}
-
-
+open_tabs = []
 def menu():
     print("1. Open Tab")
     print("2. Close Tab")
@@ -16,23 +14,35 @@ def menu():
     print()
 
 
-# This will ask the user for title and url that will be stored in tab storage that is outside the function so that the items won't get deleted
-def openTab():
-    title = input("Enter the title of the website: ")
-    url = input("Enter the URL of the website: ")
-    # if the title (key) is in tab storage then im adding another url (value) to it else I add one
-    if title in tab_storage:
-        tab_storage[title].append(url)
-    else:
-        tab_storage[title] = [url]
-    print(tab_storage)
-    print()
-
-
-def main():
+def userName():
     name = input("Enter your name: ")
     print(f"Hello {name} what would you like to do: ")
     print()
+
+
+# This will ask the user for title and url that will be stored in tab storage that is outside the function so that
+# the items won't get deleted
+def openTab():
+    tab_dic = {}
+    title = input("Enter the title of the website: ")
+    url = input("Enter the URL of the website: ")
+    # if the title (key) is in tab storage then im adding another url (value) to it else I add one
+    tab_dic["title"] = title
+    tab_dic["url"] = url
+
+    open_tabs.append(tab_dic)
+    print(open_tabs)
+    print()
+
+
+
+def closeTab():
+    return 0
+
+
+# This will contain all the function that I have created and call them depending on the users choice
+def main():
+    userName()
 
     while True:
         menu()
@@ -41,6 +51,8 @@ def main():
 
         if choice == "1":
             openTab()
+        elif choice == "2":
+            closeTab()
 
 
 main()
