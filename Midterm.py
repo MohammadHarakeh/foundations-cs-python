@@ -1,6 +1,8 @@
 # This will display the menu that the user can choose from
 
 open_tabs = []
+
+
 def menu():
     print("1. Open Tab")
     print("2. Close Tab")
@@ -35,9 +37,19 @@ def openTab():
     print()
 
 
-
 def closeTab():
-    return 0
+    user_input = input("Enter the index of the tab you want to close: ")
+    if user_input.isdigit():
+        tab_index = int(user_input)
+        if 0 <= tab_index < len(open_tabs):
+            open_tabs.pop(tab_index)
+            print(open_tabs)
+        else:
+            print("Index out of range, removing last index ")
+            open_tabs.pop(-1)
+            print(open_tabs)
+    else:
+        print("Invalid input, try again")
 
 
 # This will contain all the function that I have created and call them depending on the users choice
