@@ -28,12 +28,20 @@ def userName():
 # the items won't get deleted
 def openTab():
     tab_dic = {}
-    title = input("Enter the title of the website: ")
     global url
-    url = input("Enter the URL of the website: ")
-    # if the title (key) is in tab storage then im adding another url (value) to it else I add one
-    tab_dic["title"] = title
-    tab_dic["url"] = url
+
+    while True:
+        title = input("Enter the title of the website: ")
+        url = input("Enter the URL of the website: ")
+
+        if url.startswith("https://"):
+            tab_dic["title"] = title
+            tab_dic["url"] = url
+            break
+        else:
+            print("Invalid URL. Make sure that the URL starts with https://")
+
+
 
     open_tabs.append(tab_dic)
     print(open_tabs)
@@ -69,10 +77,11 @@ def switchTab():
         tab_index = int(user_input)
 
         if 0 <= tab_index < len(open_tabs):
+            # this chunk of code is from the following reference
+            # https://opensource.com/article/21/9/web-scraping-python-beautiful-soup
+
             response = requests.get(url)
 
-# this chunk of code is from the following reference
-# https://opensource.com/article/21/9/web-scraping-python-beautiful-soup
             if response.status_code == 200:
                 print(response.text)
             else:
