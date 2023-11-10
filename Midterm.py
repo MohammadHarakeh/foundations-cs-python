@@ -1,7 +1,6 @@
 import requests
 
 open_tabs = []
-url = ""
 
 
 # This will display the menu that the user can choose from
@@ -28,7 +27,6 @@ def userName():
 # the items won't get deleted
 def openTab():
     tab_dic = {}
-    global url
 
     while True:
         title = input("Enter the title of the website: ")
@@ -40,8 +38,6 @@ def openTab():
             break
         else:
             print("Invalid URL. Make sure that the URL starts with https://")
-
-
 
     open_tabs.append(tab_dic)
     print(open_tabs)
@@ -68,8 +64,6 @@ def closeTab():
 
 
 def switchTab():
-    # This is accessing the url that is in the first function openTab()
-    global url
     user_input = input("Enter the index of the tab you want to display: ")
     print()
 
@@ -79,13 +73,24 @@ def switchTab():
         if 0 <= tab_index < len(open_tabs):
             # this chunk of code is from the following reference
             # https://opensource.com/article/21/9/web-scraping-python-beautiful-soup
+            url = open_tabs[tab_index]["url"]
+        else:
+            print("Invalid index. Using the last index")
+            print()
+            url = open_tabs[-1]["url"]
+    elif user_input == "":
+        url = open_tabs[-1]["url"]
+    else:
+        print("Invalid input. Using the last index.")
+        print()
+        url = open_tabs[-1]["url"]
 
-            response = requests.get(url)
+    response = requests.get(url)
 
-            if response.status_code == 200:
-                print(response.text)
-            else:
-                print(f'Failed to retrieve the webpage. Status code: {response.status_code}')
+    if response.status_code == 200:
+        print(response.text)
+    else:
+        print("Failed to retrieve webpage")
 
 
 # This will contain all the function that I have created and call them depending on the users choice
