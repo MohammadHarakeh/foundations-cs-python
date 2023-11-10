@@ -93,6 +93,13 @@ def switchTab():
         print("Failed to retrieve webpage")
 
 
+def displayAllTabs():
+    print("Titles of all open tabs are: ")
+    for items in open_tabs:
+        print(items["title"])
+    print()
+
+
 # This will contain all the function that I have created and call them depending on the users choice
 def main():
     userName()
@@ -108,6 +115,8 @@ def main():
             closeTab()
         elif choice == "3":
             switchTab()
+        elif choice == "4":
+            displayAllTabs()
 
 
 main()
