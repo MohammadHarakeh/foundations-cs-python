@@ -1,5 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
 
 open_tabs = []
 url = ""
@@ -65,18 +64,17 @@ def switchTab():
     global url
     user_input = input("Enter the index of the tab you want to display: ")
     print()
+
     if user_input.isdigit():
         tab_index = int(user_input)
+
         if 0 <= tab_index < len(open_tabs):
             response = requests.get(url)
+
+# this chunk of code is from the following reference
+# https://opensource.com/article/21/9/web-scraping-python-beautiful-soup
             if response.status_code == 200:
-                soup = BeautifulSoup(response.text, 'html.parser')
-                title = soup.title.text
-                paragraphs = soup.find_all('p')
-                print(f"Title: {title}")
-                for i, paragraph in enumerate(paragraphs, 1):
-                    print(f"Paragraph {i}: {paragraph.text}")
-                print()
+                print(response.text)
             else:
                 print(f'Failed to retrieve the webpage. Status code: {response.status_code}')
 
