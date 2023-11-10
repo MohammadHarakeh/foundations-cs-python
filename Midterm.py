@@ -85,12 +85,17 @@ def switchTab():
         print()
         url = open_tabs[-1]["url"]
 
-    response = requests.get(url)
-
-    if response.status_code == 200:
-        print(response.text)
-    else:
-        print("Failed to retrieve webpage")
+# I'm using the try except in this case if the user enters a https:// with a random string then it won't
+# exit the code because of an error but then show what the error is
+    try:
+        response = requests.get(url)
+        # Check if the URL is valid based on the response
+        if response.status_code == 200:
+            print(response.text)
+        else:
+            print(f"Web page failed to open, Reason: {response.status_code}")
+    except requests.RequestException as e:
+        print(f"Error in: {e}")
 
 
 def displayAllTabs():
