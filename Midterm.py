@@ -24,9 +24,8 @@ def userName():
     print()
 
 
-# This will ask the user for title and url that will be stored in tab storage that is outside the function so that
-# the items won't get deleted
-
+# This will ask the user for title and url that will be stored in tab dic that is inside open tabs
+# Then tab dic will be stored in a list outside of open_tabs
 
 def openTab():
     tab_dic = {}
@@ -35,6 +34,7 @@ def openTab():
         title = input("Enter the title of the website: ")
         url = input("Enter the URL of the website: ")
 
+# This is used to make sure that the url will start will https
         if url.startswith("https://"):
             tab_dic["title"] = title
             tab_dic["url"] = url
@@ -52,9 +52,11 @@ def closeTab():
     # this will make sure that the entered is a digit if not it will then remove the last index
     if user_input.isdigit():
         tab_index = int(user_input)
+        # If the input is digit and is between 0 and the len of the list open_tabs then it will pop the index specified
         if 0 <= tab_index < len(open_tabs):
             open_tabs.pop(tab_index)
             print(open_tabs)
+            # Else this will run and pop the last index
         else:
             print("Index out of range, removing last index ")
             open_tabs.pop(-1)
@@ -71,8 +73,6 @@ def switchTab():
         tab_index = int(user_input)
 
         if 0 <= tab_index < len(open_tabs):
-            # this chunk of code is from the following reference
-            # https://opensource.com/article/21/9/web-scraping-python-beautiful-soup
             url = open_tabs[tab_index]["url"]
         else:
             print("Invalid index. Using the last index \n")
@@ -85,18 +85,22 @@ def switchTab():
         url = open_tabs[-1]["url"]
 
     # I'm using the try except in this case if the user enters a https:// with a random string then it won't
-    # exit the code because of an error but then show what the error is
+    # exit the code because of an error but then show what the error is that is caught in as e
     try:
+        # this chunk of code is from the following reference
+        # https://opensource.com/article/21/9/web-scraping-python-beautiful-soup
         response = requests.get(url)
         # Check if the URL is valid based on the response 200 means that it is valid so proceed
         if response.status_code == 200:
             print(response.text)
         else:
+            # this will display the status code of the website if it failed and is down
             print(f"Web page failed to open, Reason: {response.status_code}")
     except requests.RequestException as e:
         print(f"Error in: {e}")
 
 
+# This function will display all the tabs that are open as well as all nested tabs that are present
 def displayAllTabs():
     print("Titles of all open tabs are: ")
     for items in open_tabs:
@@ -110,11 +114,14 @@ def displayAllTabs():
 # def tabInfo():
 #
 
+# This will choose the index of a tab and make a nested tab inside of it
 def openNestedTab():
     user_input = input("Enter index of tab:")
 
+# This will make sure it is index same as the above
     if user_input.isdigit():
         tab_index = int(user_input)
+        # created a new dictionary names nested tab that will store a new title and url
         nested_tab = {}
         if 0 <= tab_index < len(open_tabs):
             title = input("Enter the title of the website: ")
@@ -127,16 +134,18 @@ def openNestedTab():
                 open_tabs[tab_index]["Nested Tab: "] = nested_tab
                 print(open_tabs)
 
+            # If the url doesn't contain https:// this will print
             else:
                 print("Invalid URL. Make sure that the URL starts with https:// \n")
-
+        # If the index was more than the len of the list this will print
         else:
             print("Invalid index \n")
+    # If the user entered a string and not a digit this will print
     else:
         print("Wrong input, not a number \n")
 
 
-# This will contain all the function that I have created and call them depending on the users choice
+# This will contain all the function that I have created and call them depending on the users choice from 1 -> 9
 def main():
     userName()
 
