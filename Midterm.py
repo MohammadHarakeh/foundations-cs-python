@@ -17,6 +17,7 @@ def menu():
     print()
 
 
+# This function is only used to have the user enter his name
 def userName():
     name = input("Enter your name: ")
     print(f"Hello {name} what would you like to do: ")
@@ -85,11 +86,11 @@ def switchTab():
         print()
         url = open_tabs[-1]["url"]
 
-# I'm using the try except in this case if the user enters a https:// with a random string then it won't
-# exit the code because of an error but then show what the error is
+    # I'm using the try except in this case if the user enters a https:// with a random string then it won't
+    # exit the code because of an error but then show what the error is
     try:
         response = requests.get(url)
-        # Check if the URL is valid based on the response
+        # Check if the URL is valid based on the response 200 means that it is valid so proceed
         if response.status_code == 200:
             print(response.text)
         else:
@@ -103,6 +104,22 @@ def displayAllTabs():
     for items in open_tabs:
         print(items["title"])
     print()
+
+
+def openNestedTab():
+    user_input = input("Enter index of tab: ")
+
+    nested_tab = {}
+    while True:
+        title = input("Enter the title of the website: ")
+        url = input("Enter the URL of the website: ")
+
+        if url.startswith("https://"):
+            nested_tab["title"] = title
+            nested_tab["url"] = url
+            break
+        else:
+            print("Invalid URL. Make sure that the URL starts with https://")
 
 
 # This will contain all the function that I have created and call them depending on the users choice
@@ -122,6 +139,8 @@ def main():
             switchTab()
         elif choice == "4":
             displayAllTabs()
+        elif choice == "5":
+            openNestedTab()
 
 
 main()
