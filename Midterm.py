@@ -162,6 +162,11 @@ def openNestedTab():
         print("Wrong input, not a number \n")
 
 
+def clearAllTabs():
+    open_tabs.clear()
+    print("All tabs cleared")
+
+
 # This will contain all the function that I have created and call them depending on the users choice from 1 -> 9
 def main():
     userName()
@@ -181,6 +186,8 @@ def main():
             displayAllTabs()
         elif choice == "5":
             openNestedTab()
+        elif choice == "6":
+            clearAllTabs()
 
 
 main()
