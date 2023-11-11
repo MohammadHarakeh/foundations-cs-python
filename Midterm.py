@@ -65,8 +65,7 @@ def closeTab():
 
 
 def switchTab():
-    user_input = input("Enter the index of the tab you want to display: ")
-    print()
+    user_input = input("Enter the index of the tab you want to display: \n")
 
     if user_input.isdigit():
         tab_index = int(user_input)
@@ -76,8 +75,7 @@ def switchTab():
             # https://opensource.com/article/21/9/web-scraping-python-beautiful-soup
             url = open_tabs[tab_index]["url"]
         else:
-            print("Invalid index. Using the last index")
-            print()
+            print("Invalid index. Using the last index \n")
             url = open_tabs[-1]["url"]
     elif user_input == "":
         url = open_tabs[-1]["url"]
@@ -106,20 +104,33 @@ def displayAllTabs():
     print()
 
 
+# def tabInfo():
+#
+
 def openNestedTab():
-    user_input = input("Enter index of tab: ")
+    user_input = input("Enter index of tab: \n")
 
-    nested_tab = {}
-    while True:
-        title = input("Enter the title of the website: ")
-        url = input("Enter the URL of the website: ")
+    if user_input.isdigit():
+        tab_index = int(user_input)
+        nested_tab = {}
+        if 0 <= tab_index < len(open_tabs):
+            title = input("Enter the title of the website: ")
+            url = input("Enter the URL of the website: ")
 
-        if url.startswith("https://"):
-            nested_tab["title"] = title
-            nested_tab["url"] = url
-            break
+            if url.startswith("https://"):
+                nested_tab["title"] = title
+                nested_tab["url"] = url
+
+                open_tabs[tab_index]["Nested Tab: "] = nested_tab
+                print(open_tabs)
+
+            else:
+                print("Invalid URL. Make sure that the URL starts with https:// \n")
+
         else:
-            print("Invalid URL. Make sure that the URL starts with https://")
+            print("Invalid index \n")
+    else:
+        print("Wrong input, not a number \n")
 
 
 # This will contain all the function that I have created and call them depending on the users choice
