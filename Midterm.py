@@ -26,7 +26,8 @@ def userName():
 
 # This will ask the user for title and url that will be stored in tab storage that is outside the function so that
 # the items won't get deleted
-def openTab():
+
+def createTab():
     tab_dic = {}
 
     while True:
@@ -39,7 +40,11 @@ def openTab():
             break
         else:
             print("Invalid URL. Make sure that the URL starts with https://")
+    return tab_dic
 
+
+def openTab():
+    tab_dic = createTab()
     open_tabs.append(tab_dic)
     print(open_tabs)
     print()
