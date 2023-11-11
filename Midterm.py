@@ -27,7 +27,8 @@ def userName():
 # This will ask the user for title and url that will be stored in tab storage that is outside the function so that
 # the items won't get deleted
 
-def createTab():
+
+def openTab():
     tab_dic = {}
 
     while True:
@@ -40,11 +41,6 @@ def createTab():
             break
         else:
             print("Invalid URL. Make sure that the URL starts with https://")
-    return tab_dic
-
-
-def openTab():
-    tab_dic = createTab()
     open_tabs.append(tab_dic)
     print(open_tabs)
     print()
@@ -65,8 +61,7 @@ def closeTab():
             print(open_tabs)
     # this is for the first .isdigit() where if it wasn't a digit then it will print the below.
     else:
-        print("Invalid input, try again")
-        print()
+        print("Invalid input, try again \n")
 
 
 def switchTab():
@@ -106,6 +101,9 @@ def displayAllTabs():
     print("Titles of all open tabs are: ")
     for items in open_tabs:
         print(items["title"])
+        if "Nested Tab: " in items:
+            nested = items['Nested Tab: ']['title']
+            print(f"\t{nested}")
     print()
 
 
@@ -113,7 +111,7 @@ def displayAllTabs():
 #
 
 def openNestedTab():
-    user_input = input("Enter index of tab: \n")
+    user_input = input("Enter index of tab:")
 
     if user_input.isdigit():
         tab_index = int(user_input)
