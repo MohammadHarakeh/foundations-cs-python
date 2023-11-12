@@ -21,7 +21,7 @@ def menu():
 
 # This function is only used to have the user enter his name
 def userName():
-    name = input("Enter your name: ")
+    name = input("Enter your name: ").strip()
     print(f"Hello {name} what would you like to do: ")
     print()
 
@@ -33,8 +33,8 @@ def openTab():
     tab_dic = {}
 
     while True:
-        title = input("Enter the title of the website: ")
-        url = input("Enter the URL of the website: ")
+        title = input("Enter the title of the website: ").strip()
+        url = input("Enter the URL of the website: ").strip()
 
         # This is used to make sure that the url will start will https
         if url.startswith("https://"):
@@ -125,7 +125,7 @@ def displayAllTabs():
     print("Titles of all open tabs are: ")
     # used enumerate here to keep track of the index of the title in the current item
     for i, items in enumerate(open_tabs):
-        print(f"title {i + 1}: ", items["title"])
+        print(f"{i + 1}. ", items["title"])
         # if items that are in open tabs have the following string then it will print the following /t is used to
         # indicate that it is a nested tab
         if "Nested Tab: " in items:
@@ -145,8 +145,8 @@ def openNestedTab():
         # created a new dictionary names nested tab that will store a new title and url
         nested_tab = {}
         if 0 <= tab_index < len(open_tabs):
-            title = input("Enter the title of the website: ")
-            url = input("Enter the URL of the website: ")
+            title = input("Enter the title of the website: ").strip()
+            url = input("Enter the URL of the website: ").strip()
 
             if url.startswith("https://"):
                 nested_tab["title"] = title
@@ -175,10 +175,15 @@ def clearAllTabs():
 # got some of the code from the following link added some more modification to it from my side:
 # https://ioflood.com/blog/python-write-json-to-file/
 def saveTab():
+    file_name = input("Enter file name: ")
+
+    if file_name.endswith(".json"):
+        file_name = file_name.replace(".json", "")
+
     file_path = input("Enter file path: ")
     try:
-        with open(file_path, "w") as f:
-            json.dump(open_tabs, f)
+        with open(f"{file_path}\{file_name}.json", "w") as f:
+            json.dump(open_tabs, f, indent=4)
         print(f"Tabs exported as JSON file.")
     except (ValueError, PermissionError, FileNotFoundError) as e:
         print(f"error in the following:\n{e}")
