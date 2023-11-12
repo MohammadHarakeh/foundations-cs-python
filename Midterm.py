@@ -180,27 +180,36 @@ def clearAllTabs():
 
 # got some of the code from the following link added some more modification to it from my side:
 # https://ioflood.com/blog/python-write-json-to-file/
-def saveTab():
-    file_name = input("Enter file name: ")
+# The time complexity of this is based on what I researched it is O(N) since the .dump will depend on the number
+# of open tabs hence this time complexity
 
+def fileNamePath():
+    file_name = input("Enter file name: ")
+    # im getting the name of the file then checking if the user already entered .json if yes then removing it
     if file_name.endswith(".json"):
         file_name = file_name.replace(".json", "")
-
+    # get the path that the user wants to enter
     file_path = input("Enter file path: ")
+    return file_name, file_path
+
+
+def saveTab():
+    file_name, file_path = fileNamePath()
     try:
+        # Adding the file path along with the name to create a .json file at the desired location with the desired name
         with open(f"{file_path}\{file_name}.json", "w") as f:
+            # this is what is being used to export it as json
             json.dump(open_tabs, f, indent=4)
         print(f"Tabs exported as JSON file.")
-    except (ValueError, PermissionError, FileNotFoundError) as e:
+    except (ValueError, PermissionError) as e:
         print(f"error in the following:\n{e}")
 
 
+# link for this is
+# https://ioflood.com/blog/read-json-file-python/
+# Same as the above it is O(N) since it depends on the amount that is getting read from the file
 def importTabs():
-    file_name = input("Enter file name: ")
-
-    if file_name.endswith(".json"):
-        file_name = file_name.replace(".json", "")
-    file_path = input("Enter file path: ")
+    file_name, file_path = fileNamePath()
 
     try:
         with open(f"{file_path}\{file_name}.json", "r") as f:
@@ -210,6 +219,7 @@ def importTabs():
     except (ValueError, FileNotFoundError) as e:
         print(f"Error in the following: \n{e}\n")
         return None
+
 
 # This will exit the program
 def exitProgram():
