@@ -75,6 +75,7 @@ def closeTab():
 
 
 # This function will display the HTML code of the website that the user specifies
+# This is O(1) complexity since it only has if else and only a requests.get("url") but in general it is O(1)
 def switchTab():
     user_input = None
     if len(open_tabs) == 1:
@@ -117,6 +118,7 @@ def switchTab():
 
 
 # This function will display all the tabs that are open as well as all nested tabs that are present
+# This is of time complexity O(N) since there is a for loop and will depend on the users input
 def displayAllTabs():
     print("Titles of all open tabs are: ")
     # used enumerate here to keep track of the index of the title in the current item
