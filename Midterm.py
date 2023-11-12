@@ -172,13 +172,20 @@ def clearAllTabs():
     print("All tabs cleared")
 
 
-# got some of the code from the following link:
+# got some of the code from the following link added some more modification to it from my side:
 # https://ioflood.com/blog/python-write-json-to-file/
 def saveTab():
-    with open("open_tabs", "w") as f:
-        json.dump(open_tabs, f)
-    print(f"Tabs exported as JSON file.")
+    file_path = input("Enter file path: ")
+    try:
+        with open(file_path, "w") as f:
+            json.dump(open_tabs, f)
+        print(f"Tabs exported as JSON file.")
+    except (ValueError, PermissionError, FileNotFoundError) as e:
+        print(f"error in the following:\n{e}")
 
+
+# def importTabs():
+#
 
 # This will contain all the function that I have created and call them depending on the users choice from 1 -> 9
 def main():
@@ -203,6 +210,8 @@ def main():
             clearAllTabs()
         elif choice == "7":
             saveTab()
+        elif choice == "8":
+            importTabs()
 
 
 main()
