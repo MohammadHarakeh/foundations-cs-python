@@ -93,13 +93,28 @@ def closeTab():
 def switchTab():
     user_input = getUserInput("display its HTML code",
                               f"what index you want to display its HTML from 0 -> {len(open_tabs) - 1}")
+
     # if it is a digit and not None since if it is None it means that the user entered something other than a digit,
     # and it remained None, so it will run the below
     if user_input is not None and user_input.isdigit():
         tab_index = int(user_input)
 
         if 0 <= tab_index < len(open_tabs):
-            url = open_tabs[tab_index]["url"]
+            parent_tab = open_tabs[tab_index]
+            nested_tab = parent_tab.get("Nested Tab: ")
+
+            # Choose whether to display the parent or the child and having strip and lower in case the user enter
+            # capital P or there are spaces
+            choice = input("Do you want to display the parent tab (P) or the nested tab (N)? ").strip().lower()
+
+            if choice == 'p':
+                url = parent_tab["url"]
+            # This makes sure that if you type N that if there is a nested it will print if not the else will print
+            elif choice == 'n' and nested_tab:
+                url = nested_tab["url"]
+            else:
+                print("Invalid choice. Displaying the parent tab by default.")
+                url = parent_tab["url"]
         else:
             print("Invalid index. Using the last index \n")
             url = open_tabs[-1]["url"]
