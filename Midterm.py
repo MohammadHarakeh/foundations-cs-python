@@ -211,6 +211,11 @@ def importTabs():
         print(f"Error in the following: \n{e}\n")
         return None
 
+# This will exit the program
+def exitProgram():
+    print("Closing program")
+    exit()
+
 
 # This will contain all the function that I have created and call them depending on the users choice from 1 -> 9
 def main():
@@ -237,6 +242,8 @@ def main():
             saveTab()
         elif choice == "8":
             importTabs()
+        elif choice == "9":
+            exitProgram()
 
 
 main()
