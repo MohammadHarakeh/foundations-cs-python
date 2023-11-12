@@ -86,6 +86,8 @@ def switchTab():
     user_input = None
     if len(open_tabs) == 1:
         user_input = input("There is only one tab open at index 0\ntype 0 to display it's HTML code: ")
+    elif len(open_tabs) == 0:
+        return print("There are 0 open tabs\n")
     else:
         user_input = input(
             f"there are {len(open_tabs)} open tabs what index you want to display it's HTML from 0 -> {len(open_tabs) - 1}:  ")
