@@ -1,4 +1,5 @@
 import json
+import os.path
 
 import requests
 
@@ -189,7 +190,9 @@ def fileNamePath():
         file_name = file_name.replace(".json", "")
     # get the path that the user wants to enter
     file_path = input("Enter file path: ")
-    full_path = f"{file_path}\{file_name}.json"
+    # I used os.path because to make sure if the user is on windows or on linux to help in the joining of the file
+    # name and the file path if the system uses / it will use that if it uses \ it will take that
+    full_path = os.path.join(file_path, f"{file_name}.json")
     return full_path
 
 
