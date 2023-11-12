@@ -132,10 +132,8 @@ def displayAllTabs():
     print()
 
 
-# def tabInfo():
-#
-
 # This will choose the index of a tab and make a nested tab inside of it
+# This will be of time complexity O(1) since it is mostly if else statements
 def openNestedTab():
     user_input = input("Enter index of tab: ")
 
@@ -166,6 +164,7 @@ def openNestedTab():
         print("Wrong input, not a number \n")
 
 
+# This is O(1) since it is only removing all the elements in open_tabs
 def clearAllTabs():
     open_tabs.clear()
     print("All tabs cleared")
