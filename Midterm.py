@@ -143,8 +143,9 @@ def displayAllTabs():
 # This will choose the index of a tab and make a nested tab inside of it
 # This will be of time complexity O(1) since it is mostly if else statements
 def openNestedTab():
+    print(f"there are {len(open_tabs)} open tabs\n")
     if len(open_tabs) > 0:
-        user_input = input("Enter index of tab: ")
+        user_input = input("Enter index of tab starting from 0: ")
 
         # This will make sure it is index same as the above
         if user_input.isdigit():
@@ -171,8 +172,6 @@ def openNestedTab():
         # If the user entered a string and not a digit this will print
         else:
             print("Wrong input, not a number \n")
-    else:
-        print("There are no tabs to add to\n")
 
 
 # ---------------------------------- Option 6 -------------------------------------------
@@ -208,7 +207,7 @@ def saveTab():
             with open(full_path, "w") as f:
                 # this is what is being used to export it as json
                 json.dump(open_tabs, f, indent=4)
-            print(f"Tabs exported as JSON file.")
+            print(f"Tabs exported as JSON file.\n")
         except (ValueError, PermissionError) as e:
             print(f"error in the following:\n{e}")
     else:
