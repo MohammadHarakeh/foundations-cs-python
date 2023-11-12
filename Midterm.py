@@ -206,10 +206,11 @@ def importTabs():
         with open(f"{file_path}\{file_name}.json", "r") as f:
             load_json = json.load(f)
         print("Tabs successfully imported.")
-        return open_tabs[load_json]
+        return open_tabs.extend(load_json)
     except (ValueError, FileNotFoundError) as e:
         print(f"Error in the following: \n{e}\n")
         return None
+
 
 # This will contain all the function that I have created and call them depending on the users choice from 1 -> 9
 def main():
