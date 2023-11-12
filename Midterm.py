@@ -127,7 +127,6 @@ def switchTab():
 # This function will display all the tabs that are open as well as all nested tabs that are present
 # This is of time complexity O(N) since there is a for loop and will depend on the users input
 def displayAllTabs():
-
     if len(open_tabs) > 0:
         print("Titles of all open tabs are: ")
         # used enumerate here to keep track of the index of the title in the current item
@@ -143,37 +142,39 @@ def displayAllTabs():
         print("There are no tabs open\n")
 
 
-
 # This will choose the index of a tab and make a nested tab inside of it
 # This will be of time complexity O(1) since it is mostly if else statements
 def openNestedTab():
-    user_input = input("Enter index of tab: ")
+    if len(open_tabs) > 0:
+        user_input = input("Enter index of tab: ")
 
-    # This will make sure it is index same as the above
-    if user_input.isdigit():
-        tab_index = int(user_input)
-        # created a new dictionary names nested tab that will store a new title and url
-        nested_tab = {}
-        if 0 <= tab_index < len(open_tabs):
-            title = input("Enter the title of the website: ").strip()
-            url = input("Enter the URL of the website: ").strip()
+        # This will make sure it is index same as the above
+        if user_input.isdigit():
+            tab_index = int(user_input)
+            # created a new dictionary names nested tab that will store a new title and url
+            nested_tab = {}
+            if 0 <= tab_index < len(open_tabs):
+                title = input("Enter the title of the website: ").strip()
+                url = input("Enter the URL of the website: ").strip()
 
-            if url.startswith("https://"):
-                nested_tab["title"] = title
-                nested_tab["url"] = url
+                if url.startswith("https://"):
+                    nested_tab["title"] = title
+                    nested_tab["url"] = url
 
-                open_tabs[tab_index]["Nested Tab: "] = nested_tab
-                print(open_tabs)
+                    open_tabs[tab_index]["Nested Tab: "] = nested_tab
+                    print(f"\nAdded a new tab at index {tab_index}\n")
 
-            # If the url doesn't contain https:// this will print
+                # If the url doesn't contain https:// this will print
+                else:
+                    print("Invalid URL. Make sure that the URL starts with https:// \n")
+            # If the index was more than the len of the list this will print
             else:
-                print("Invalid URL. Make sure that the URL starts with https:// \n")
-        # If the index was more than the len of the list this will print
+                print("Invalid index \n")
+        # If the user entered a string and not a digit this will print
         else:
-            print("Invalid index \n")
-    # If the user entered a string and not a digit this will print
+            print("Wrong input, not a number \n")
     else:
-        print("Wrong input, not a number \n")
+        print("There are no tabs to add to\n")
 
 
 # This is O(1) since it is only removing all the elements in open_tabs
@@ -187,6 +188,8 @@ def clearAllTabs():
 # The time complexity of this is based on what I researched it is O(N) since the .dump will depend on the number
 # of open tabs hence this time complexity
 
+
+# Used to remove repetition in the below two functions and to get the file name and path from the user
 def fileNamePath():
     file_name = input("Enter file name: ")
     # im getting the name of the file then checking if the user already entered .json if yes then removing it
@@ -194,19 +197,24 @@ def fileNamePath():
         file_name = file_name.replace(".json", "")
     # get the path that the user wants to enter
     file_path = input("Enter file path: ")
-    return file_name, file_path
+    full_path = f"{file_path}\{file_name}.json"
+    return full_path
 
 
 def saveTab():
-    file_name, file_path = fileNamePath()
-    try:
-        # Adding the file path along with the name to create a .json file at the desired location with the desired name
-        with open(f"{file_path}\{file_name}.json", "w") as f:
-            # this is what is being used to export it as json
-            json.dump(open_tabs, f, indent=4)
-        print(f"Tabs exported as JSON file.")
-    except (ValueError, PermissionError) as e:
-        print(f"error in the following:\n{e}")
+    if len(open_tabs) > 0:
+        full_path = fileNamePath()
+        try:
+            # Adding the file path along with the name to create a .json file at the desired location with the
+            # desired name
+            with open(full_path, "w") as f:
+                # this is what is being used to export it as json
+                json.dump(open_tabs, f, indent=4)
+            print(f"Tabs exported as JSON file.")
+        except (ValueError, PermissionError) as e:
+            print(f"error in the following:\n{e}")
+    else:
+        print("There are no open tabs.\n")
 
 
 # link for this is
