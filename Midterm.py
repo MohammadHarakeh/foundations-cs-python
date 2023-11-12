@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 open_tabs = []
@@ -170,6 +172,11 @@ def clearAllTabs():
     print("All tabs cleared")
 
 
+def saveTab():
+    with open("open_tabs.json", "w") as f:
+        json.dump(open_tabs, f)
+
+
 # This will contain all the function that I have created and call them depending on the users choice from 1 -> 9
 def main():
     userName()
@@ -191,6 +198,8 @@ def main():
             openNestedTab()
         elif choice == "6":
             clearAllTabs()
+        elif choice == "7":
+            saveTab()
 
 
 main()
