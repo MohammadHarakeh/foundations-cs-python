@@ -37,7 +37,7 @@ def openTab():
         url = input("Enter the URL of the website: ").strip()
 
         # This is used to make sure that the url will start will https
-        if url.startswith("https://"):
+        if url.startswith("https://") or url.startswith("http://"):
             tab_dic["title"] = title
             tab_dic["url"] = url
             break
@@ -45,7 +45,9 @@ def openTab():
             print("Invalid URL. Make sure that the URL starts with https://")
     open_tabs.append(tab_dic)
     print(f"\nNumber of open tabs are: {len(open_tabs)}")
-    print(f"{open_tabs}\n")
+    for i in range(len(open_tabs)):
+        print(open_tabs[i]["title"])
+    print()
 
 
 # This function will remove a tab after specifying the index
@@ -55,6 +57,8 @@ def closeTab():
     user_input = None
     if len(open_tabs) == 1:
         user_input = input("There is only one tab open at index 0\ntype 0 to remove it: ")
+    elif len(open_tabs) == 0:
+        return print("There are 0 open tabs\n")
     else:
         user_input = input(
             f"there are {len(open_tabs)} open tabs what index you want to remove from 0 -> {len(open_tabs) - 1}:  ")
@@ -116,7 +120,7 @@ def switchTab():
             # this will display the status code of the website if it failed and is down
             print(f"Web page failed to open, Reason: {response.status_code}")
     except requests.RequestException as e:
-        print(f"Error in: {e}")
+        print(f"Error in: {e}\n")
 
 
 # This function will display all the tabs that are open as well as all nested tabs that are present
@@ -190,7 +194,7 @@ def saveTab():
 
 
 # def importTabs():
-#
+
 
 # This will contain all the function that I have created and call them depending on the users choice from 1 -> 9
 def main():
@@ -215,8 +219,8 @@ def main():
             clearAllTabs()
         elif choice == "7":
             saveTab()
-        elif choice == "8":
-            importTabs()
+        # elif choice == "8":
+        # importTabs()
 
 
 main()
