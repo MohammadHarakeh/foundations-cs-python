@@ -195,8 +195,21 @@ def saveTab():
         print(f"error in the following:\n{e}")
 
 
-# def importTabs():
+def importTabs():
+    file_name = input("Enter file name: ")
 
+    if file_name.endswith(".json"):
+        file_name = file_name.replace(".json", "")
+    file_path = input("Enter file path: ")
+
+    try:
+        with open(f"{file_path}\{file_name}.json", "r") as f:
+            load_json = json.load(f)
+        print("Tabs successfully imported.")
+        return open_tabs[load_json]
+    except (ValueError, FileNotFoundError) as e:
+        print(f"Error in the following: \n{e}\n")
+        return None
 
 # This will contain all the function that I have created and call them depending on the users choice from 1 -> 9
 def main():
@@ -221,8 +234,8 @@ def main():
             clearAllTabs()
         elif choice == "7":
             saveTab()
-        # elif choice == "8":
-        # importTabs()
+        elif choice == "8":
+            importTabs()
 
 
 main()
