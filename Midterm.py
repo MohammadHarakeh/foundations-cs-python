@@ -68,13 +68,12 @@ def closeTab():
         tab_index = int(user_input)
         # If the input is digit and is between 0 and the len of the list open_tabs then it will pop the index specified
         if 0 <= tab_index < len(open_tabs):
+            print(f"Removing tab at index {tab_index}")
             open_tabs.pop(tab_index)
-            print(open_tabs)
             # Else this will run and pop the last index
         else:
             print("Index out of range, removing last index ")
             open_tabs.pop(-1)
-            print(open_tabs)
     # this is for the first .isdigit() where if it wasn't a digit then it will print the below.
     else:
         print("Invalid input, try again \n")
@@ -128,16 +127,21 @@ def switchTab():
 # This function will display all the tabs that are open as well as all nested tabs that are present
 # This is of time complexity O(N) since there is a for loop and will depend on the users input
 def displayAllTabs():
-    print("Titles of all open tabs are: ")
-    # used enumerate here to keep track of the index of the title in the current item
-    for i, items in enumerate(open_tabs):
-        print(f"{i + 1}. ", items["title"])
-        # if items that are in open tabs have the following string then it will print the following /t is used to
-        # indicate that it is a nested tab
-        if "Nested Tab: " in items:
-            nested = items['Nested Tab: ']['title']
-            print(f"\tNested Title: {nested}")
-    print()
+
+    if len(open_tabs) > 0:
+        print("Titles of all open tabs are: ")
+        # used enumerate here to keep track of the index of the title in the current item
+        for i, items in enumerate(open_tabs):
+            print(f"{i + 1}. ", items["title"])
+            # if items that are in open tabs have the following string then it will print the following /t is used to
+            # indicate that it is a nested tab
+            if "Nested Tab: " in items:
+                nested = items['Nested Tab: ']['title']
+                print(f"\tNested Title: {nested}")
+        print()
+    else:
+        print("There are no tabs open\n")
+
 
 
 # This will choose the index of a tab and make a nested tab inside of it
