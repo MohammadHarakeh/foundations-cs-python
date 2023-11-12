@@ -26,7 +26,7 @@ def userName():
 
 # This will ask the user for title and url that will be stored in tab dic that is inside open tabs
 # Then tab dic will be stored in a list outside of open_tabs
-
+# This function will be O(N) because of the while loop that is present inside of it
 def openTab():
     tab_dic = {}
 
@@ -47,6 +47,8 @@ def openTab():
 
 
 # This function will remove a tab after specifying the index
+# This function will be O(N) since everything is O(1) except for the pop which
+# When removing an element and then shifting every other element making it O(N)
 def closeTab():
     user_input = None
     if len(open_tabs) == 1:
