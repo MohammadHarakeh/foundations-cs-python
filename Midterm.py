@@ -50,75 +50,63 @@ def openTab():
     print()
 
 
+# This is created to remove repetition. I am taking two parameters in this function that are used to display different
+# descriptions based on the ran code
+# This will be O(N) since it depends on the len of the open_tabs
+def getUserInput(action_description, options_description):
+    user_input = None
+    if len(open_tabs) == 1:
+        user_input = input(f"There is only one tab open at index 0\ntype 0 to {action_description}: ")
+    elif len(open_tabs) == 0:
+        print("There are 0 open tabs\n")
+    else:
+        user_input = input(f"there are {len(open_tabs)} open tabs {options_description}: ")
+    return user_input
+
+
 # This function will remove a tab after specifying the index
 # This function will be O(N) since everything is O(1) except for the pop which
 # When removing an element and then shifting every other element making it O(N)
 def closeTab():
-    user_input = None
-    if len(open_tabs) == 1:
-        user_input = input("There is only one tab open at index 0\ntype 0 to remove it: ")
-    elif len(open_tabs) == 0:
-        return print("There are 0 open tabs\n")
-    else:
-        user_input = input(
-            f"there are {len(open_tabs)} open tabs what index you want to remove from 0 -> {len(open_tabs) - 1}:  ")
+    # if the open tabs were 1 then it will print remove it in the action description and the rest is what will be
+    # printed in the options description if the len of the open_tabs were more than 1 and remove it won't be used
+    user_input = getUserInput("remove it", f"what index you want to remove from 0 -> {len(open_tabs) - 1}")
 
-    # this will make sure that the entered is a digit if not it will then remove the last index
-    if user_input.isdigit():
+    if user_input is not None and user_input.isdigit():
         tab_index = int(user_input)
-        # If the input is digit and is between 0 and the len of the list open_tabs then it will pop the index specified
         if 0 <= tab_index < len(open_tabs):
-            print(f"Removing tab at index {tab_index}")
+            print(f"Removing tab at index {tab_index} \n")
             open_tabs.pop(tab_index)
-            # Else this will run and pop the last index
         else:
             print("Index out of range, removing last index ")
             open_tabs.pop(-1)
-    # this is for the first .isdigit() where if it wasn't a digit then it will print the below.
     else:
-        print("Invalid input, try again \n")
+        print("Invalid input or no tabs to close, try again \n")
 
 
-# This function will display the HTML code of the website that the user specifies
-# This is O(1) complexity since it only has if else and only a requests.get("url") but in general it is O(1)
 def switchTab():
-    user_input = None
-    if len(open_tabs) == 1:
-        user_input = input("There is only one tab open at index 0\ntype 0 to display it's HTML code: ")
-    elif len(open_tabs) == 0:
-        return print("There are 0 open tabs\n")
-    else:
-        user_input = input(
-            f"there are {len(open_tabs)} open tabs what index you want to display it's HTML from 0 -> {len(open_tabs) - 1}:  ")
+    user_input = getUserInput("display its HTML code",
+                              f"what index you want to display its HTML from 0 -> {len(open_tabs) - 1}")
 
-    if user_input.isdigit():
+    if user_input is not None and user_input.isdigit():
         tab_index = int(user_input)
 
         if 0 <= tab_index < len(open_tabs):
-            # url will be taken from the list open_tabs specifying the index and taking what is under "url"
             url = open_tabs[tab_index]["url"]
         else:
-            # If it was out of range then it will print the url of the last index
             print("Invalid index. Using the last index \n")
             url = open_tabs[-1]["url"]
-    # The user doesn't enter anything will still display last index
     elif user_input == "":
         url = open_tabs[-1]["url"]
     else:
-        print("Invalid input. Using the last index.\n")
-        url = open_tabs[-1]["url"]
+        print("Invalid input or no tabs to display, try again \n")
+        return
 
-    # I'm using the try except in this case if the user enters a https:// with a random string then it won't
-    # exit the code because of an error but then show what the error is that is caught in as e
     try:
-        # this chunk of code is from the following reference
-        # https://opensource.com/article/21/9/web-scraping-python-beautiful-soup
         response = requests.get(url)
-        # Check if the URL is valid based on the response 200 means that it is valid so proceed
         if response.status_code == 200:
             print(response.text)
         else:
-            # this will display the status code of the website if it failed and is down
             print(f"Web page failed to open, Reason: {response.status_code}")
     except requests.RequestException as e:
         print(f"Error in: {e}\n")
