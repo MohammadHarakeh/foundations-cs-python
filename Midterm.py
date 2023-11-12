@@ -26,6 +26,7 @@ def userName():
     print()
 
 
+# ---------------------------------- Option 1 -------------------------------------------
 # This will ask the user for title and url that will be stored in tab dic that is inside open tabs
 # Then tab dic will be stored in a list outside of open_tabs
 # This function will be O(N) because of the while loop that is present inside of it
@@ -64,6 +65,7 @@ def getUserInput(action_description, options_description):
     return user_input
 
 
+# ---------------------------------- Option 2 -------------------------------------------
 # This function will remove a tab after specifying the index
 # This function will be O(N) since everything is O(1) except for the pop which
 # When removing an element and then shifting every other element making it O(N)
@@ -84,10 +86,14 @@ def closeTab():
         print("Invalid input or no tabs to close, try again \n")
 
 
+# ---------------------------------- Option 3 -------------------------------------------
+# This will print the HTML of the url that you specify depending on the index
+# It is O(N) since it depends on the open_tabs of the user
 def switchTab():
     user_input = getUserInput("display its HTML code",
                               f"what index you want to display its HTML from 0 -> {len(open_tabs) - 1}")
-
+    # if it is a digit and not None since if it is None it means that the user entered something other than a digit,
+    # and it remained None, so it will run the below
     if user_input is not None and user_input.isdigit():
         tab_index = int(user_input)
 
@@ -101,17 +107,20 @@ def switchTab():
     else:
         print("Invalid input or no tabs to display, try again \n")
         return
-
+    # if the response is 200 so working then it will print the HTML
     try:
         response = requests.get(url)
         if response.status_code == 200:
             print(response.text)
+        # This will print the status code if it was other than 200
         else:
             print(f"Web page failed to open, Reason: {response.status_code}")
+    # this catches any errors that might occur since the user might type a random website link that doesn't work
     except requests.RequestException as e:
         print(f"Error in: {e}\n")
 
 
+# ---------------------------------- Option 4 -------------------------------------------
 # This function will display all the tabs that are open as well as all nested tabs that are present
 # This is of time complexity O(N) since there is a for loop and will depend on the users input
 def displayAllTabs():
@@ -130,6 +139,7 @@ def displayAllTabs():
         print("There are no tabs open\n")
 
 
+# ---------------------------------- Option 5 -------------------------------------------
 # This will choose the index of a tab and make a nested tab inside of it
 # This will be of time complexity O(1) since it is mostly if else statements
 def openNestedTab():
@@ -165,16 +175,11 @@ def openNestedTab():
         print("There are no tabs to add to\n")
 
 
+# ---------------------------------- Option 6 -------------------------------------------
 # This is O(1) since it is only removing all the elements in open_tabs
 def clearAllTabs():
     open_tabs.clear()
     print("All tabs cleared")
-
-
-# got some of the code from the following link added some more modification to it from my side:
-# https://ioflood.com/blog/python-write-json-to-file/
-# The time complexity of this is based on what I researched it is O(N) since the .dump will depend on the number
-# of open tabs hence this time complexity
 
 
 # Used to remove repetition in the below two functions and to get the file name and path from the user
@@ -189,6 +194,11 @@ def fileNamePath():
     return full_path
 
 
+# ---------------------------------- Option 7 -------------------------------------------
+# got some of the code from the following link added some more modification to it from my side:
+# https://ioflood.com/blog/python-write-json-to-file/
+# The time complexity of this is based on what I researched it is O(N) since the .dump will depend on the number
+# of open tabs hence this time complexity
 def saveTab():
     if len(open_tabs) > 0:
         full_path = fileNamePath()
@@ -205,22 +215,27 @@ def saveTab():
         print("There are no open tabs.\n")
 
 
+# ---------------------------------- Option 8 -------------------------------------------
 # link for this is
 # https://ioflood.com/blog/read-json-file-python/
 # Same as the above it is O(N) since it depends on the amount that is getting read from the file
+# This will get a json file from what the user specifies location and will be added to the open_tabs
 def importTabs():
-    file_name, file_path = fileNamePath()
+    full_path = fileNamePath()
 
     try:
-        with open(f"{file_path}\{file_name}.json", "r") as f:
+        with open(full_path, "r") as f:
             load_json = json.load(f)
-        print("Tabs successfully imported.")
+        print("Tabs successfully imported.\n")
+        # .extend is used in case the user already entered some information so that they will be added to what he
+        # already typed
         return open_tabs.extend(load_json)
     except (ValueError, FileNotFoundError) as e:
         print(f"Error in the following: \n{e}\n")
         return None
 
 
+# ---------------------------------- Option 9 -------------------------------------------
 # This will exit the program
 def exitProgram():
     print("Closing program")
