@@ -43,7 +43,7 @@ class singlyLinkedList:
         user_input = int(input("Enter number: "))
         self.addNode(user_input)
         self.displayNodes()
-        self.userInput()  # Recursive call to add another node
+        self.addNodeUserInput()  # Recursive call to add another node
 
     def displayNodes(self):
         current = self.head
