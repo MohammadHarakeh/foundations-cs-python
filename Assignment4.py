@@ -19,10 +19,31 @@ class Node:
     def __init__(self, info):
         self.info = info
         self.next = None
+
+
 class singlyLinkedList:
 
     def __init__(self):
         self.head = None
+        self.size = 0
+
+    def addNode(self, info):
+        new_node = Node(info)
+
+        if not self.head:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
+        self.size += 1
+
+    def addNodeUserInput(self):
+        user_input = int(input("Enter number: "))
+        self.addNode(user_input)
+        self.displayNodes()
+        self.userInput()  # Recursive call to add another node
 
     def displayNodes(self):
         current = self.head
@@ -46,16 +67,15 @@ def main():
     node2.next = node3
     node3.next = node4
 
-
     choice = input("\nEnter choice 1 -> 6: ")
-
 
     if choice == "1":
         singlyLinkedListMenu()
         sub_choice = input("\nEnter choice a -> d: ")
-        if sub_choice == "b":
+        if sub_choice == "a":
+            ll.userInput()
+        elif sub_choice == "b":
             ll.displayNodes()
-
 
 
 main()
