@@ -56,7 +56,7 @@ def addMatrices():
         print()
 
 
-# addMatrice is O(N^2)
+# addMatrices is O(N^2)
 
 def checkRotation():
     matrix1 = []
@@ -262,7 +262,6 @@ def main():
             else:
                 print("Number not in list")
             print()
-
             print(mergeSort(int_s))
             mergeSort(s)
             print()
