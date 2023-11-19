@@ -41,15 +41,19 @@ class singlyLinkedList:
 
     def addNodeUserInput(self):
         user_input = int(input("Enter number: "))
-        self.addNode(user_input)
-        self.displayNodes()
-        self.addNodeUserInput()  # Recursive call to add another node
+        if user_input == -999:
+            return self.displayNodes()
+        else:
+            self.addNode(user_input)
+            self.displayNodes()
+            self.addNodeUserInput()  # Recursive call to add another node
 
     def displayNodes(self):
         current = self.head
         while current != None:
             print(current.info, end=" ")
             current = current.next
+        print("Current List: ")
         print()
 
 
@@ -73,7 +77,7 @@ def main():
         singlyLinkedListMenu()
         sub_choice = input("\nEnter choice a -> d: ")
         if sub_choice == "a":
-            ll.userInput()
+            ll.addNodeUserInput()
         elif sub_choice == "b":
             ll.displayNodes()
 
