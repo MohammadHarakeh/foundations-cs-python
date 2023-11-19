@@ -7,8 +7,23 @@ def menu():
     print("6. Exit")
 
 
+def singlyLinkedListMenu():
+    print("a. Add Node")
+    print("b. Display Nodes")
+    print("c. Search for & Delete Node")
+    print("d. Return to main menu")
+
+
 def main():
     menu()
+
+    choice = input("\nEnter choice 1 -> 6: ")
+    sub_choice = input("\nEnter choice a -> d: ")
+
+    if choice == "1":
+        singlyLinkedListMenu()
+        if sub_choice = "a":
+
 
 
 main()
