@@ -53,9 +53,24 @@ class singlyLinkedList:
         while current != None:
             print(current.info, end=" ")
             current = current.next
-        print("Current List: ")
+
         print()
 
+    def deleteNode(self, info):
+        current = self.head
+        if current.info == info:
+            self.head = current.next
+        else:
+            while current:
+                if current.info == info:
+                    break
+                prev = current
+                current = current.next
+            if current == None:
+                return
+            prev.next = current.next
+            current = None
+        self.displayNodes()
 
 def main():
     menu()
@@ -80,6 +95,9 @@ def main():
             ll.addNodeUserInput()
         elif sub_choice == "b":
             ll.displayNodes()
+        elif sub_choice == "c":
+            delete_value = int(input("Enter value to delete: "))
+            ll.deleteNode(delete_value)
 
 
 main()
