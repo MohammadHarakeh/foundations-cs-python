@@ -70,6 +70,38 @@ class singlyLinkedList:
         self.displayNodes()
 
 
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def push(self, info):
+        self.items.append(info)
+
+    def pop(self):
+        return self.items.pop()
+
+
+def palindromeCheck():
+    stack = Stack()
+    reversed_text = ""
+
+    user_input = input("Enter a string: ")
+
+    for i in user_input:
+        stack.push(i)
+
+    while not stack.isEmpty():
+        reversed_text = reversed_text + stack.pop()
+
+    if user_input == reversed_text:
+        print('The string is a palindrome.\n')
+    else:
+        print('The string is not a palindrome.\n')
+
+
 def main():
     ll = singlyLinkedList()
 
@@ -101,7 +133,8 @@ def main():
                 menu()
             else:
                 print("Wrong input returning to menu.\n")
-
+        elif choice == "2":
+            palindromeCheck()
 
 
 main()
