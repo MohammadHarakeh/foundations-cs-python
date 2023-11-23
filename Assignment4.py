@@ -41,20 +41,17 @@ class singlyLinkedList:
 
     def addNodeUserInput(self):
         user_input = int(input("Enter number: "))
-        if user_input == -999:
-            return self.displayNodes()
-        else:
-            self.addNode(user_input)
-            self.displayNodes()
-            self.addNodeUserInput()  # Recursive call to add another node
+        self.addNode(user_input)
+        self.displayNodes()
 
     def displayNodes(self):
         current = self.head
+        print("\nCurrent List: ", end="")
         while current != None:
             print(current.info, end=" ")
             current = current.next
 
-        print()
+        print("\n")
 
     def deleteNode(self, info):
         current = self.head
@@ -66,14 +63,14 @@ class singlyLinkedList:
                     break
                 prev = current
                 current = current.next
-            if current == None:
+            if current is None:
                 return
             prev.next = current.next
             current = None
         self.displayNodes()
 
+
 def main():
-    menu()
     ll = singlyLinkedList()
 
     node1 = Node(20)
@@ -86,18 +83,25 @@ def main():
     node2.next = node3
     node3.next = node4
 
-    choice = input("\nEnter choice 1 -> 6: ")
+    while True:
+        menu()
+        choice = input("\nEnter choice 1 -> 6: ")
 
-    if choice == "1":
-        singlyLinkedListMenu()
-        sub_choice = input("\nEnter choice a -> d: ")
-        if sub_choice == "a":
-            ll.addNodeUserInput()
-        elif sub_choice == "b":
-            ll.displayNodes()
-        elif sub_choice == "c":
-            delete_value = int(input("Enter value to delete: "))
-            ll.deleteNode(delete_value)
+        if choice == "1":
+            singlyLinkedListMenu()
+            sub_choice = input("\nEnter choice a -> d: ").lower().split()
+            if sub_choice == "a":
+                ll.addNodeUserInput()
+            elif sub_choice == "b":
+                ll.displayNodes()
+            elif sub_choice == "c":
+                delete_value = int(input("Enter value to delete: "))
+                ll.deleteNode(delete_value)
+            elif sub_choice == "d":
+                menu()
+            else:
+                print("Wrong input returning to menu.\n")
+
 
 
 main()
