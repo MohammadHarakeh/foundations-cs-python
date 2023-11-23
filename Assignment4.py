@@ -14,6 +14,12 @@ def singlyLinkedListMenu():
     print("d. Return to main menu")
 
 
+def priorityQueueMenu():
+    print("a. Add a student")
+    print("b. Interview a student")
+    print("c. Return to main menu")
+
+
 class Node:
 
     def __init__(self, info):
@@ -102,6 +108,18 @@ def palindromeCheck():
         print('The string is not a palindrome.\n')
 
 
+class priorityQueue():
+
+    def __init__(self):
+        self.head = None
+        self.size = 0
+
+    def displayNodes(self):
+        current = self.head
+        while current != None:
+            print()
+
+
 def main():
     ll = singlyLinkedList()
 
@@ -135,6 +153,9 @@ def main():
                 print("Wrong input returning to menu.\n")
         elif choice == "2":
             palindromeCheck()
+        elif choice == "3":
+            sub_choice = input("\nEnter choice a -> c: ").lower().split()
+            if sub_choice == "a":
 
 
 main()
