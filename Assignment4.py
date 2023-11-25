@@ -108,20 +108,72 @@ def palindromeCheck():
         print('The string is not a palindrome.\n')
 
 
-class priorityQueue():
+class student:
+    def __init__(self, name, midterm_grade, final_grade, personality):
+        self.name = name
+        self.midterm_grade = midterm_grade
+        self.final_grade = final_grade
+        self.personality = personality
 
+    def Comparison(self, other):
+        if self.personality != other.personality:
+            return self.personality
+        elif self.final_grade > other.final_grade:
+            return self.final_grade
+        elif self.midterm_grade > other.midterm_grade:
+            return self.midterm_grade
+
+
+class priorityQueue:
     def __init__(self):
-        self.head = None
-        self.size = 0
+        self.students = []
 
-    def displayNodes(self):
-        current = self.head
-        while current != None:
-            print()
+    def add_student(self, student):
+        self.students.append(student)
+
+    def interview_student(self):
+        self.students.sort(reverse=True)
+        for i in self.students:
+            print(f"Interviewing {i.name}")
+
+
+def addStudent():
+    name = input("Enter student's name: ")
+
+    while True:
+        try:
+            midterm_grade = int(input("Enter midterm grade (0-100): "))
+            if 0 <= midterm_grade <= 100:
+                break
+            else:
+                print("Enter a valid input between 0 and 100")
+        except ValueError:
+            print("Invalid input, enter a number.")
+
+    while True:
+        try:
+            final_grade = int(input("Enter final grade (0-100): "))
+            if 0 <= final_grade <= 100:
+                break
+            else:
+                print("Enter a valid input between 0 and 100")
+        except ValueError:
+            print("Invalid input, enter a number.")
+
+    personality = input("Does the student have a good personality? (yes/no): \n").lower()
+    if personality == "yes":
+        personality = True
+    else:
+        personality = False
+
+    print(f"{name} midterm_grade: {midterm_grade}/100, final_grade: {final_grade}/100, good_attitude: {personality}")
+    print()
+    return student(name, midterm_grade, final_grade, personality)
 
 
 def main():
     ll = singlyLinkedList()
+    priority_queue = priorityQueue()
 
     node1 = Node(20)
     node2 = Node(10)
@@ -139,7 +191,7 @@ def main():
 
         if choice == "1":
             singlyLinkedListMenu()
-            sub_choice = input("\nEnter choice a -> d: ").lower().split()
+            sub_choice = input("\nEnter choice a -> d: ").lower()
             if sub_choice == "a":
                 ll.addNodeUserInput()
             elif sub_choice == "b":
@@ -148,14 +200,19 @@ def main():
                 delete_value = int(input("Enter value to delete: "))
                 ll.deleteNode(delete_value)
             elif sub_choice == "d":
-                menu()
+                print("Exiting\n")
             else:
                 print("Wrong input returning to menu.\n")
         elif choice == "2":
             palindromeCheck()
         elif choice == "3":
-            sub_choice = input("\nEnter choice a -> c: ").lower().split()
+            priorityQueueMenu()
+            sub_choice = input("\nEnter choice a -> c: ").lower()
             if sub_choice == "a":
+                new_student = addStudent()
+                priority_queue.add_student(new_student)
+            elif sub_choice == "b":
+                priority_queue.interview_student()
 
 
 main()
