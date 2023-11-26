@@ -276,7 +276,7 @@ class Graph:
             self.vertices.pop(vertex)
         print("Removed Vertex\n")
 
-    def removeEdge(self,vertex1,vertex2):
+    def removeEdge(self, vertex1, vertex2):
         if vertex1 in self.vertices and vertex2 in self.vertices:
             if vertex2 in self.vertices[vertex1]:
                 self.vertices[vertex1].remove(vertex2)
@@ -303,6 +303,7 @@ def main():
     ll = singlyLinkedList()
     priority_queue = priorityQueue()
     graph = Graph()
+    counter = 0
 
     node1 = Node(20)
     node2 = Node(10)
@@ -318,6 +319,8 @@ def main():
         menu()
         choice = input("\nEnter choice 1 -> 6: ")
         sub_choice = ""
+        if counter == 3:
+            break
 
         if choice == "1":
             while sub_choice != "d":
@@ -325,36 +328,53 @@ def main():
                 sub_choice = input("\nEnter choice a -> d: ").lower()
                 if sub_choice == "a":
                     ll.addNodeUserInput()
+                    counter = 0
                 elif sub_choice == "b":
                     ll.displayNodes()
+                    counter = 0
                 elif sub_choice == "c":
                     delete_value = int(input("Enter value to delete: "))
                     ll.deleteNode(delete_value)
+                    counter = 0
                 elif sub_choice == "d":
                     print("Exiting\n")
+                    counter = 0
                 else:
-                    print("Wrong input returning to menu.\n")
+                    counter += 1
+                    print(f"Wrong input you have {4 - counter} tries left.\n")
+            counter = 0
 
         elif choice == "2":
             palindromeCheck()
+            counter = 0
 
         elif choice == "3":
+            counter = 0
             while sub_choice != "c":
                 priorityQueueMenu()
                 sub_choice = input("\nEnter choice a -> c: ").lower()
+                counter = 0
                 if sub_choice == "a":
                     new_student = addStudent()
                     priority_queue.add_student(new_student)
+                    counter = 0
                 elif sub_choice == "b":
                     priority_queue.interview_student()
+                    counter = 0
                 elif sub_choice == "c":
                     print("Exiting\n")
+                    counter = 0
+                else:
+                    counter += 1
+                    print(f"Wrong input you have {4 - counter} tries left.\n")
 
         elif choice == "4":
             result = infixUserInput()
             print(result, "\n")
+            counter = 0
 
         elif choice == "5":
+            counter = 0
             while sub_choice != "f":
                 graphMenu()
                 print()
@@ -362,30 +382,38 @@ def main():
                 if sub_choice == "a":
                     add_vertex = input("Enter a vertex to add: ").upper()
                     graph.addVertex(add_vertex)
+                    counter = 0
                 elif sub_choice == "b":
                     edge1 = input("Enter first vertex: ").upper()
                     edge2 = input("Enter second vertex: ").upper()
                     graph.addEdge(edge1, edge2)
+                    counter = 0
                 elif sub_choice == "c":
                     remove_vertex = input("Enter a vertex to remove: ").upper()
                     graph.removeVertex(remove_vertex)
+                    counter = 0
                 elif sub_choice == "d":
                     edge1 = input("Enter first vertex: ").upper()
                     edge2 = input("Enter second vertex: ").upper()
                     graph.removeEdge(edge1, edge2)
+                    counter = 0
                 elif sub_choice == "e":
                     graph.display()
+                    counter = 0
                 elif sub_choice == "f":
                     print("Exiting\n")
+                    counter = 0
                 else:
-                    print("Wrong input, Try again\n")
+                    counter += 1
+                    print(f"Wrong input you have {4 - counter} tries left.\n")
 
         elif choice == "6":
             print("Exiting Program")
             break
 
         else:
-            print("Wrong input, Try again\n")
+            counter += 1
+            print(f"Wrong input you have {4 - counter} tries left.\n")
 
 
 main()
