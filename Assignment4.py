@@ -287,8 +287,16 @@ class Graph:
             print("Vertices not found\n")
 
     def display(self):
+        display_input = int(input("Enter degree to display: "))
+        print("This is the entire graph")
         for i, j in self.vertices.items():
-            print(f"{i}: {j}")
+            print(f"{i} : {j}")
+        print()
+        print(f"These are of degree {display_input}: ")
+        for i, j in self.vertices.items():
+            if len(j) >= display_input:
+                print(f"{i}: {len(j)}")
+            print()
 
 
 def main():
