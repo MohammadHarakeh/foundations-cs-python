@@ -114,7 +114,7 @@ def palindromeCheck():
         print('The string is not a palindrome.\n')
 
 
-def compute(number1,number2,operator):
+def compute(number1, number2, operator):
     if operator == "+":
         return number1 + number2
     elif operator == "-":
@@ -124,11 +124,59 @@ def compute(number1,number2,operator):
     elif operator == "/":
         return number1 / number2
 
+
 def infix(equation):
-    prec_dictionary = {"(": 0, ")": 0,  "*": 2, "/": 2, "+": 1, "-": 1}
+    prec_dictionary = {"(": 0, ")": 0, "*": 2, "/": 2, "+": 1, "-": 1}
     operator_stack = Stack()
     operand_stack = Stack()
     allowed_operators = "+-/*"
+
+    i = 0
+    while i < len(equation):
+        char = equation[i]
+
+        if char in allowed_operators:
+            while not operator_stack.isEmpty() and prec_dictionary[char] <= prec_dictionary[operator_stack.peek()]:
+                value2 = operand_stack.pop()
+                operator = operator_stack.pop()
+                value1 = operand_stack.pop()
+                result = compute(value1, value2, operator)
+                operand_stack.push(result)
+            operator_stack.push(char)
+            i += 1
+        elif char == "(":
+            operator_stack.push(char)
+            i += 1
+        elif char == ")":
+            while operator_stack.peek() != "(":
+                value2 = operand_stack.pop()
+                operator = operator_stack.pop()
+                value1 = operand_stack.pop()
+                result = compute(value1, value2, operator)
+                operand_stack.push(result)
+            operator_stack.pop()
+            i += 1
+        else:
+            j = i
+            while j < len(equation) and (equation[j].isdigit() or equation[j] == '.'):
+                j += 1
+            operand = equation[i:j]
+            operand_stack.push(float(operand))
+            i = j
+
+    while not operator_stack.isEmpty():
+        value2 = operand_stack.pop()
+        operator = operator_stack.pop()
+        value1 = operand_stack.pop()
+        result = int(compute(value1, value2, operator))
+        operand_stack.push(result)
+
+    return operand_stack.pop()
+
+
+def infixUserInput():
+    user_input = str(input("Enter an infix expression without spaces: "))
+    return infix(user_input)
 
 
 class student:
@@ -238,6 +286,9 @@ def main():
                 priority_queue.interview_student()
             elif sub_choice == "c":
                 print("Exiting\n")
+        elif choice == "4":
+            result = infixUserInput()
+            print(result, "\n")
 
 
 main()
