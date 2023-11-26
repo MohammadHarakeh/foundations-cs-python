@@ -124,6 +124,13 @@ def compute(number1,number2,operator):
     elif operator == "/":
         return number1 / number2
 
+def infix(equation):
+    prec_dictionary = {"(": 0, ")": 0,  "*": 2, "/": 2, "+": 1, "-": 1}
+    operator_stack = Stack()
+    operand_stack = Stack()
+    allowed_operators = "+-/*"
+
+
 class student:
     def __init__(self, name, midterm_grade, final_grade, personality):
         self.name = name
