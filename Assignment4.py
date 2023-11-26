@@ -89,6 +89,12 @@ class Stack:
     def pop(self):
         return self.items.pop()
 
+    def peek(self):
+        return self.items[len(self.items) - 1]
+
+    def size(self):
+        return len(self.items)
+
 
 def palindromeCheck():
     stack = Stack()
@@ -213,6 +219,8 @@ def main():
                 priority_queue.add_student(new_student)
             elif sub_choice == "b":
                 priority_queue.interview_student()
+            elif sub_choice == "c":
+                print("Exiting\n")
 
 
 main()
