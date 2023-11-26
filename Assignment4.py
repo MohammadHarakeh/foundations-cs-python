@@ -19,6 +19,7 @@ def priorityQueueMenu():
     print("b. Interview a student")
     print("c. Return to main menu")
 
+
 def graphMenu():
     print("a. Add vertex")
     print("b. Add edge")
@@ -26,6 +27,7 @@ def graphMenu():
     print("d. Remove edge")
     print("e. Display vertices with a degree of X or more.")
     print("f. Return to main menu")
+
 
 class Node:
 
@@ -249,9 +251,28 @@ def addStudent():
     return student(name, midterm_grade, final_grade, personality)
 
 
+class Graph:
+    def __init__(self):
+        self.vertices = {}
+
+    def addVertex(self, vertex):
+        if vertex not in self.vertices:
+            self.vertices[vertex] = []
+
+    def addEdge(self, vertex1, vertex2):
+        if vertex1 in self.vertices and vertex2 in self.vertices:
+            self.vertices[vertex1].append(vertex2)
+            self.vertices[vertex2].append(vertex1)
+
+    def display(self):
+        for i, j in self.vertices.items():
+            print(f"{i}: {j}")
+
+
 def main():
     ll = singlyLinkedList()
     priority_queue = priorityQueue()
+    graph = Graph()
 
     node1 = Node(20)
     node2 = Node(10)
@@ -296,6 +317,19 @@ def main():
         elif choice == "4":
             result = infixUserInput()
             print(result, "\n")
+        elif choice == "5":
+            graphMenu()
+            print()
+            sub_choice = input("\nEnter choice a -> c: ").lower()
+            if sub_choice == "a":
+                add_vertex = input("Enter a vertex to add: ")
+                graph.addVertex(add_vertex)
+            elif sub_choice == "b":
+                edge1 = input("Enter first edge: ")
+                edge2 = input("Enter second edge: ")
+                graph.addEdge(edge1, edge2)
+            elif sub_choice == "e":
+                graph.display()
 
 
 main()
