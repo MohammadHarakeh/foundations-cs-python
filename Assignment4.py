@@ -296,7 +296,7 @@ class Graph:
         for i, j in self.vertices.items():
             if len(j) >= display_input:
                 print(f"{i}: {len(j)}")
-            print()
+        print()
 
 
 def main():
