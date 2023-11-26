@@ -258,11 +258,28 @@ class Graph:
     def addVertex(self, vertex):
         if vertex not in self.vertices:
             self.vertices[vertex] = []
+        print("Added Vertex\n")
 
     def addEdge(self, vertex1, vertex2):
         if vertex1 in self.vertices and vertex2 in self.vertices:
             self.vertices[vertex1].append(vertex2)
             self.vertices[vertex2].append(vertex1)
+        print("Added Edges\n")
+
+    def removeVertex(self, vertex):
+        if vertex in self.vertices:
+            self.vertices.pop(vertex)
+        print("Removed Vertex\n")
+
+    def removeEdge(self,vertex1,vertex2):
+        if vertex1 in self.vertices and vertex2 in self.vertices:
+            if vertex2 in self.vertices[vertex1]:
+                self.vertices[vertex1].remove(vertex2)
+            if vertex1 in self.vertices[vertex2]:
+                self.vertices[vertex2].remove(vertex1)
+            print("Removed Edges\n")
+        else:
+            print("Vertices not found\n")
 
     def display(self):
         for i, j in self.vertices.items():
@@ -325,9 +342,16 @@ def main():
                 add_vertex = input("Enter a vertex to add: ")
                 graph.addVertex(add_vertex)
             elif sub_choice == "b":
-                edge1 = input("Enter first edge: ")
-                edge2 = input("Enter second edge: ")
+                edge1 = input("Enter first vertex: ")
+                edge2 = input("Enter second vertex: ")
                 graph.addEdge(edge1, edge2)
+            elif sub_choice == "c":
+                remove_vertex = input("Enter a vertex to remove: ")
+                graph.removeVertex(remove_vertex)
+            elif sub_choice == "d":
+                edge1 = input("Enter first vertex: ")
+                edge2 = input("Enter second vertex: ")
+                graph.removeEdge(edge1, edge2)
             elif sub_choice == "e":
                 graph.display()
 
