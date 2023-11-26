@@ -114,6 +114,16 @@ def palindromeCheck():
         print('The string is not a palindrome.\n')
 
 
+def compute(number1,number2,operator):
+    if operator == "+":
+        return number1 + number2
+    elif operator == "-":
+        return number1 - number2
+    elif operator == "*":
+        return number1 * number2
+    elif operator == "/":
+        return number1 / number2
+
 class student:
     def __init__(self, name, midterm_grade, final_grade, personality):
         self.name = name
