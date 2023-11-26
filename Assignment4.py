@@ -19,6 +19,13 @@ def priorityQueueMenu():
     print("b. Interview a student")
     print("c. Return to main menu")
 
+def graphMenu():
+    print("a. Add vertex")
+    print("b. Add edge")
+    print("c. Remove vertex")
+    print("d. Remove edge")
+    print("e. Display vertices with a degree of X or more.")
+    print("f. Return to main menu")
 
 class Node:
 
