@@ -55,9 +55,14 @@ class singlyLinkedList:
         self.size += 1
 
     def addNodeUserInput(self):
-        user_input = int(input("Enter number: "))
-        self.addNode(user_input)
-        self.displayNodes()
+        while True:
+            user_input = input("Enter number: ")
+            print()
+            if user_input.isdigit():
+                self.addNode(user_input)
+                break
+            else:
+                print("Wrong input")
 
     def displayNodes(self):
         current = self.head
@@ -304,56 +309,75 @@ def main():
     while True:
         menu()
         choice = input("\nEnter choice 1 -> 6: ")
+        sub_choice = ""
 
         if choice == "1":
-            singlyLinkedListMenu()
-            sub_choice = input("\nEnter choice a -> d: ").lower()
-            if sub_choice == "a":
-                ll.addNodeUserInput()
-            elif sub_choice == "b":
-                ll.displayNodes()
-            elif sub_choice == "c":
-                delete_value = int(input("Enter value to delete: "))
-                ll.deleteNode(delete_value)
-            elif sub_choice == "d":
-                print("Exiting\n")
-            else:
-                print("Wrong input returning to menu.\n")
+            while sub_choice != "d":
+                singlyLinkedListMenu()
+                sub_choice = input("\nEnter choice a -> d: ").lower()
+                if sub_choice == "a":
+                    ll.addNodeUserInput()
+                elif sub_choice == "b":
+                    ll.displayNodes()
+                elif sub_choice == "c":
+                    delete_value = int(input("Enter value to delete: "))
+                    ll.deleteNode(delete_value)
+                elif sub_choice == "d":
+                    print("Exiting\n")
+                else:
+                    print("Wrong input returning to menu.\n")
+
         elif choice == "2":
             palindromeCheck()
+
         elif choice == "3":
-            priorityQueueMenu()
-            sub_choice = input("\nEnter choice a -> c: ").lower()
-            if sub_choice == "a":
-                new_student = addStudent()
-                priority_queue.add_student(new_student)
-            elif sub_choice == "b":
-                priority_queue.interview_student()
-            elif sub_choice == "c":
-                print("Exiting\n")
+            while sub_choice != "c":
+                priorityQueueMenu()
+                sub_choice = input("\nEnter choice a -> c: ").lower()
+                if sub_choice == "a":
+                    new_student = addStudent()
+                    priority_queue.add_student(new_student)
+                elif sub_choice == "b":
+                    priority_queue.interview_student()
+                elif sub_choice == "c":
+                    print("Exiting\n")
+
         elif choice == "4":
             result = infixUserInput()
             print(result, "\n")
+
         elif choice == "5":
-            graphMenu()
-            print()
-            sub_choice = input("\nEnter choice a -> c: ").lower()
-            if sub_choice == "a":
-                add_vertex = input("Enter a vertex to add: ")
-                graph.addVertex(add_vertex)
-            elif sub_choice == "b":
-                edge1 = input("Enter first vertex: ")
-                edge2 = input("Enter second vertex: ")
-                graph.addEdge(edge1, edge2)
-            elif sub_choice == "c":
-                remove_vertex = input("Enter a vertex to remove: ")
-                graph.removeVertex(remove_vertex)
-            elif sub_choice == "d":
-                edge1 = input("Enter first vertex: ")
-                edge2 = input("Enter second vertex: ")
-                graph.removeEdge(edge1, edge2)
-            elif sub_choice == "e":
-                graph.display()
+            while sub_choice != "f":
+                graphMenu()
+                print()
+                sub_choice = input("\nEnter choice a -> f: ").lower()
+                if sub_choice == "a":
+                    add_vertex = input("Enter a vertex to add: ").upper()
+                    graph.addVertex(add_vertex)
+                elif sub_choice == "b":
+                    edge1 = input("Enter first vertex: ").upper()
+                    edge2 = input("Enter second vertex: ").upper()
+                    graph.addEdge(edge1, edge2)
+                elif sub_choice == "c":
+                    remove_vertex = input("Enter a vertex to remove: ").upper()
+                    graph.removeVertex(remove_vertex)
+                elif sub_choice == "d":
+                    edge1 = input("Enter first vertex: ").upper()
+                    edge2 = input("Enter second vertex: ").upper()
+                    graph.removeEdge(edge1, edge2)
+                elif sub_choice == "e":
+                    graph.display()
+                elif sub_choice == "f":
+                    print("Exiting\n")
+                else:
+                    print("Wrong input, Try again\n")
+
+        elif choice == "6":
+            print("Exiting Program")
+            break
+
+        else:
+            print("Wrong input, Try again\n")
 
 
 main()
